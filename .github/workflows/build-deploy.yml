@@ -2,7 +2,7 @@ name: Build and Deploy
 
 on:
 push: 
-branches: main
+branches:
 - main
 jobs: gh-pages
 build-and-deploy:
