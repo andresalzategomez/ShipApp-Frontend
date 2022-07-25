@@ -1,31 +1,40 @@
-name: Build and Deploy
-
-on:
-push: 
-branches:
-- main
-jobs: gh-pages
-build-and-deploy:
-runs-on: ubuntu-latest
-steps:
-- name: Checkout
-uses: actions/checkout@v3
-- uses: actions/setup-node@v1
-with:
-node-version: '10.x'
-- uses: actions/cache@v1
-with: 
-path: ~/.npm
-key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-restory-keys: |
-${{ runner.os }}-node.
-- name: Build
-run: |
-npm install 
-npm run-script deploy
-- name: Deploy
-uses: JamesIves/github-pages-deploy-action@releases/v3
-with: 
-GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-BRANCH: gh-pages
-FOLDER: dist/workshop
+version: v1.0
+name: Addressbook
+agent:
+  machine:
+    type: e1-standard-2
+    os_image: ubuntu1804
+blocks:
+  - name: Install dependencies
+    task:
+      env_vars:
+        - name: NODE_ENV
+          value: test
+    prologue:
+        commands:
+          - checkout
+          - nvm use
+    jobs:
+        - name: npm install and cache
+          commands:
+            - cache restore
+            - npm install
+            - cache store 
+- name: Tests
+    task:
+      env_vars:
+        - name: NODE_ENV
+          value: test
+      prologue:
+        commands:
+          - checkout
+          - nvm use
+          - cache restore
+       jobs:
+        - name: Static test
+          commands:
+            - npm run lint
+        - name: Unit test
+          commands:
+            - sem-service start postgres
+            - npm run test
