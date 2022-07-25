@@ -11,7 +11,10 @@ steps:
 - name: Checkout
 uses: actions/checkout@v3
 - uses: actions/setup-node@v1
-whith:
+with:
+node-version: '10.x'
+- uses: actions/cache@v1
+with: 
 path: ~/.npm
 key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
 restory-keys: |
