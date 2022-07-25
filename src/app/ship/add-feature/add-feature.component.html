@@ -1,0 +1,60 @@
+<div class="container">
+    <h1>Add Feature List</h1>
+
+    <a href="#" routerLink="/ship/view" class="btn btn-primary">Back</a>
+
+    <form [formGroup]="form">
+
+        <th>
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input formControlName="name" id="name" type="text" [(ngModel)]="ship.name" class="form-control">
+
+                <label for="date_creation">Date Creation:</label>
+                <input formControlName="date_creation" id="date_creation" type="text" [(ngModel)]="ship.date_creation"
+                    class="form-control">
+
+                <label for="date_destruction">Date Destruction:</label>
+                <input formControlName="date_destruction" id="date_destruction" type="text"
+                    [(ngModel)]="ship.date_destruction" class="form-control">
+
+                <label for="id_type">Type Ship:</label>
+                <select formControlName="id_type" id="id_type" [(ngModel)]="ship.id_type"
+                    class="form-select bg-light form-control" matNativeControl>
+                    <option value="{{item.id}}" *ngFor="let item of types " [selected]="item.id === ship.id_type">
+                        {{item.name}}</option>
+                </select>
+            </div>
+        </th>
+
+
+        <th>
+            <form [formGroup]="formAdd" (ngSubmit)="submit()">
+                <div class="d-flex mx-2" >
+                    <div class="d-flex mx-2"  *ngIf="isAdd">
+                        <select formControlName="id_feature" id="id_feature" class="form-select bg-light form-control"
+                            matNativeControl>
+                            <option value="{{item.id}}" *ngFor="let item of feature ">
+                                {{item.description}}</option>
+                        </select>
+                        <input formControlName="value" id="value" type="text" placeholder="Value" class="form-control">
+                        <button class="btn btn-primary m-2 mb-2 mt-3" type="submit">Add</button>
+                    </div>
+                    <button class="btn btn-primary m-2 mb-2 mt-3" (click)="isAdd=true" *ngIf="!isAdd">+</button>
+                </div>
+            </form>
+            <table class="table table-bordered text-center mx-5">
+
+                <tr>
+                    <th>Feature</th>
+                    <th>Value</th>
+                </tr>
+                <tr style="font-weight: normal;" *ngFor="let feat of featureList;let indexOfelement=index;">
+                    <td>{{feature[feat.id_feature-1].description}}</td>
+                    <td>{{feat.value_feature}}</td>
+                </tr>
+            </table>
+
+        </th>
+    </form>
+</div>

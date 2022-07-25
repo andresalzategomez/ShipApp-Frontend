@@ -1,0 +1,62 @@
+<div class="container">
+  
+    <a href="#" routerLink="/ship/create/" class="btn btn-success">Create New Ship</a>
+    <a href="#" routerLink="/ship/createFeature/" class="btn btn-primary m-2" data-bs-toggle="modal" data-bs-target="#exampleModal">Create New Feature</a>
+    <a href="#" routerLink="/ship/search/" class="btn btn-danger m-2">Search</a>
+    <a href="#" routerLink="/ship/behaviors/" class="btn btn-secondary m-2">Behaviors</a>
+
+    <table class="table table-bordered text-center">
+      <tr class="">
+        <th>ID</th>
+        <th>Name</th>
+        <th>Date Creation</th>
+        <th>Date Destruction</th>
+        <th>Type</th>
+        <th width="220px">Action</th>
+      </tr>
+      <tr *ngFor="let ship of ships">
+        <td>{{ ship.id }}</td>
+        <td>{{ ship.name }}</td>
+        <td>{{ ship.date_creation }}</td>
+        <td>{{ ship.date_destruction }}</td>
+        <td>{{types[ship.id_type-1].name}}</td>
+        <!-- <select class="form-select bg-light" matNativeControl disabled>
+          <option value="item" *ngFor="let item of types " [selected]="item.id === ship.id_type">{{item.name}}</option>
+        </select> -->
+        <th>
+          <a href="#" [routerLink]="['/ship/', ship.id, 'addF']" class="btn btn-default bg-default border mx-2">Feature</a>
+          <a href="#" [routerLink]="['/ship/', ship.id, 'edit']" class="btn btn-primary bg-primary mx-2">Edit</a>
+          <button type="button" (click)="deleteShip(ship.id)" class="btn btn-danger bg-danger  mx-2">X</button>
+        </th>
+      </tr>
+    </table>
+    
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Create Feature</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <form [formGroup]="formAddFeature" (ngSubmit)="submit()">
+          <div class="modal-body">
+            <label for="description">Description:</label>
+            <input 
+                formControlName="description"
+                id="description" 
+                type="text"
+                class="form-control"
+                placeholder="Description">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Create</button>
+          </div>
+        </form>
+        </div>
+      </div>
+    </div>
+
+
+ </div>
