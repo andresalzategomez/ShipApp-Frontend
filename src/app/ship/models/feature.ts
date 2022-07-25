@@ -1,3 +1,4 @@
+// Interfaz de tipo caracteristica
 export interface Feature {
     id: number;
     id_ship: number;

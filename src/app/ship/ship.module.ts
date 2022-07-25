@@ -11,6 +11,7 @@ import { AddFeatureComponent } from './add-feature/add-feature.component';
 import { SearchComponent } from './search/search.component';
 import { BehaviorsComponent } from './behaviors/behaviors.component';
 
+// este decorador realiza sobreescritura de metadatos
 @NgModule({
   declarations: [
     ViewComponent,

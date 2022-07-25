@@ -1,3 +1,4 @@
+// interfaz de tipo nave
 export interface Ship {
     id: number;
     name: string;

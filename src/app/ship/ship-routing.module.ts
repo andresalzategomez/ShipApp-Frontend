@@ -7,6 +7,7 @@ import { AddFeatureComponent } from './add-feature/add-feature.component';
 import { SearchComponent } from './search/search.component';
 import { BehaviorsComponent } from './behaviors/behaviors.component';
 
+// variable donde se registran las rutas y se asigna un componente
 const routes: Routes = [
   { path: 'ship', redirectTo: 'ship/view', pathMatch: 'full'},
   { path: 'ship/view', component: ViewComponent },
